@@ -1,3 +1,5 @@
+# #
+# GPL v3
 import serial
 import time
 import unicodedata
