@@ -19,8 +19,9 @@ def append_element_to_list(inList, inElement):
 def list_to_string(inList):
     strOut = ""
     first = True
-    if first:
-        for items in inList:
+
+    for items in inList:
+        if first:
             strOut=  strOut + str( items )
             first = False
         else:
@@ -193,22 +194,41 @@ class pyNuDLR:
                                             7, 7, 7, 7, 7, 5, 5,  7,
                                             5, 5, 5, 5, 5, 5, 5,  1    ] }
 
-    def a_put_pattern(self, patternNum, patternType):
-        strOut = "<Patt"+str( int(patternNum) )
+    def a_put_pattern(self, patternNum):
+        strOut = "<Patt"+str( int(patternNum) )+"-"
         Rhandside = self.a_patterns['Patt'+str(patternNum)]
         strOut = strOut + list_to_string( Rhandside )
         strOut = strOut + ">"
-        print(strOut)
-        print( strOut[0:8]+"-")
+        #print(strOut)
+        #print( strOut.encode() )
+        #strOut = b' ' ' '
+        self.sIO.send( strOut.encode() )
+        #print( strOut[0:8]+"-")
+
+    def a_load_pattern(self, patternNum, patternType):
+        pass
+    def push_patterns(self):
+        for i in range(21,41):
+            self.a_put_pattern(i)
+            print(i)
+        
                 
             
         
                     
+
+
 s = pyNuDLR()
 print("_________________")
 s.a_pull_patterns()
 s.a_parse_patterns()
 s.a_make_pattern(30)
+s.a_put_pattern(40)
+s.push_patterns()
+
+
+
+
 #s.a_put_pattern(30,40)
 #print("_________________")
 #print(s.sIO._strBuff)
@@ -217,5 +237,7 @@ s.a_make_pattern(30)
 #        if len(items) > 0:
 #            if items[0] == '<':
 #                 print(items)
+
+print("payse")
 
 

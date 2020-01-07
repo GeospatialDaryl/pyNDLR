@@ -81,18 +81,26 @@ class pyNuDLR:
     
     def __init__(self):
         self.sIO = sIO()
+        self._listBuffer = []
 
     def a_pull_patterns(self):
         #self.sIO.sIO.write(b'<b>')
         self.sIO.send(b'<b>')
+        self._listBuffer = []
+        
         listPatterns = s.sIO._strBuff.split('\n')
-        print(type(listPatterns))
-        print(len(listPatterns))
+        #print(type(listPatterns))
+        
         for items in listPatterns:
-            if items[0] != '<':
-                pass
-            else:
-                print(items)
+            #print(len(items[0]))
+            #print(items)
+            try:
+                if items[0] != '<':
+                    pass
+                else:
+                    print(items)
+                    self._listBuffer.append(items)
+            except: pass
             #if items[0] == '<':
             #    print(items)
         #
@@ -101,7 +109,9 @@ class pyNuDLR:
 s = pyNuDLR()
 s.a_pull_patterns()
 print("_________________")
-print(s.sIO._strBuff)
+#print(s.sIO._strBuff)
+print( s._listBuffer)
+
 
 
 
